@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Password Strength Indicator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card">
+        <header class="card__header">
+          <p class="eyebrow">Computer Security Project 2</p>
+          <h1>Password Strength Indicator</h1>
+        </header>
+
+        <div class="field">
+          <label for="masked">Masked field (*** shows each character)</label>
+          <input id="masked" type="text" inputmode="text" autocomplete="off" placeholder="Start typing here"/>
+        </div>
+
+        <div class="field">
+          <label for="actual">Actual characters</label>
+          <input id="actual" type="text" inputmode="text" autocomplete="off" readonly />
+        </div>
+
+        <div class="meter">
+          <div class="meter__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="meter__fill" id="meterFill"></div>
+          </div>
+          <div class="meter__info">
+            <span class="meter__label">
+              Strength
+              <span class="info-icon" tabindex="0">
+                i
+                <span class="tooltip">
+                  <span class="tooltip__title">Critical Capping Logic</span>
+                  <span class="tooltip__item"><span>•</span> <strong>Breach:</strong> Capped at 10 (Very Weak)</span>
+                  <span class="tooltip__item"><span>•</span> <strong>Dictionary &le; 15:</strong> Capped at 30 (Weak)</span>
+                  <span class="tooltip__item"><span>•</span> <strong>Entropy &lt; 8:</strong> Capped at 10 (Very Weak)</span>
+                  <span class="tooltip__item"><span>•</span> <strong>Entropy &lt; 15:</strong> Capped at 25 (Weak)</span>
+                </span>
+              </span>
+            </span>
+            <span class="meter__value" id="meterValue">Very Weak</span>
+          </div>
+          <p class="meter__hint" id="meterHint">Add length and variety to make it stronger.</p>
+        </div>
+
+        <details class="breakdown">
+          <summary class="breakdown__summary">View Score Breakdown</summary>
+          <div class="breakdown__content">
+            <div class="breakdown__row">
+              <div>
+                <p class="breakdown__title">Entropy score</p>
+                <p class="breakdown__meta"><span id="entropyBits">0</span> bits</p>
+              </div>
+              <span class="breakdown__score" id="entropyScore">0 / 30</span>
+            </div>
+            <div class="breakdown__row">
+              <div>
+                <p class="breakdown__title">Dictionary &amp; breach resistance</p>
+                <p class="breakdown__meta" id="dictStatus">No matches found.</p>
+              </div>
+              <span class="breakdown__score" id="dictScore">25 / 25</span>
+            </div>
+            <div class="breakdown__row">
+              <div>
+                <p class="breakdown__title">Pattern &amp; predictability</p>
+                <p class="breakdown__meta" id="patternStatus">No patterns detected.</p>
+              </div>
+              <span class="breakdown__score" id="patternScore">20 / 20</span>
+            </div>
+            <div class="breakdown__row">
+              <div>
+                <p class="breakdown__title">Composition &amp; diversity</p>
+                <p class="breakdown__meta" id="compositionStatus">Balanced character mix.</p>
+              </div>
+              <span class="breakdown__score" id="compositionScore">15 / 15</span>
+            </div>
+          </div>
+        </details>
+
+        <div class="rules">
+          <p>Boost your score by:</p>
+          <ul>
+            <li>Upper &amp; lower case letters</li>
+            <li>Numbers and symbols</li>
+            <li>12+ characters when possible</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
