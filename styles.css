@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Manrope:wght@400;600&display=swap');
+
+:root {
+  color-scheme: light;
+  --bg: #f7f1eb;
+  --card: #fff8f2;
+  --ink: #21170f;
+  --muted: #5b4a40;
+  --accent: #e17f38;
+  --accent-strong: #b75b1f;
+  --track: #e9ded4;
+  --shadow: 0 24px 60px rgba(33, 23, 15, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", system-ui, sans-serif;
+  background: radial-gradient(circle at top left, #fff4e6 0%, #f7f1eb 45%, #f0e7dd 100%);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+.page {
+  padding: 48px 20px 64px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: min(720px, 100%);
+  background: var(--card);
+  border-radius: 28px;
+  padding: 36px 40px 40px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: -120px;
+  top: -120px;
+  background: radial-gradient(circle, rgba(225, 127, 56, 0.3) 0%, rgba(225, 127, 56, 0) 65%);
+  pointer-events: none;
+}
+
+.card__header h1 {
+  font-family: "Fraunces", serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin: 0 0 8px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  color: var(--accent-strong);
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.subhead {
+  margin: 0;
+  color: var(--muted);
+}
+
+.field {
+  display: grid;
+  gap: 10px;
+}
+
+label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input {
+  font-size: 1.1rem;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #e6dbd1;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  font-family: "Manrope", system-ui, sans-serif;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(225, 127, 56, 0.2);
+}
+
+input[readonly] {
+  background: #fdf8f3;
+  color: var(--muted);
+}
+
+.meter {
+  display: grid;
+  gap: 12px;
+}
+
+.meter__track {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.meter__fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f25c54 0%, #fcbf49 40%, #9dcc5f 70%, #53a567 100%);
+  transition: width 0.2s ease;
+}
+
+.meter__info {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.meter__label {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--track);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  font-style: italic;
+  cursor: help;
+  position: relative;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.info-icon:hover, .info-icon:focus {
+  background: var(--accent);
+  color: white;
+}
+
+.tooltip {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: -12px;
+  transform: translateY(-10px);
+  width: max-content;
+  max-width: 320px;
+  background: #fff;
+  color: var(--ink);
+  padding: 16px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.4;
+  box-shadow: 0 15px 35px rgba(33, 23, 15, 0.15);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 100;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  text-align: left;
+  border: 1px solid #eadfd5;
+}
+
+.tooltip__title {
+  display: block;
+  font-family: "Fraunces", serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--ink);
+  border-bottom: 1px solid #eadfd5;
+  padding-bottom: 8px;
+}
+
+.tooltip__item {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+.tooltip__item:last-child {
+  margin-bottom: 0;
+}
+
+.tooltip__item span:first-child {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 21px;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-bottom-color: #eadfd5;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: 21px;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #fff;
+}
+
+.info-icon:hover .tooltip, .info-icon:focus .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tooltip strong {
+  color: var(--ink);
+}
+
+.meter__value {
+  font-family: "Fraunces", serif;
+  font-size: 1.1rem;
+}
+
+.meter__hint {
+  margin: 0;
+  color: var(--muted);
+}
+
+.breakdown {
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #eadfd5;
+  overflow: hidden;
+}
+
+.breakdown__summary {
+  padding: 16px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  user-select: none;
+}
+
+.breakdown__summary::-webkit-details-marker {
+  display: none;
+}
+
+.breakdown__summary::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+details[open] .breakdown__summary::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+details[open] .breakdown__summary {
+  border-bottom: 1px solid #eadfd5;
+}
+
+.breakdown__content {
+  display: grid;
+  gap: 14px;
+  padding: 16px 18px;
+  background: #fff;
+}
+
+.breakdown__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.breakdown__title {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.breakdown__meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.breakdown__score {
+  font-family: "Fraunces", serif;
+  font-size: 1.1rem;
+}
+
+.rules {
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px 18px;
+  border: 1px solid #eadfd5;
+}
+
+.rules p {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.rules ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 28px 22px 30px;
+  }
+}
